@@ -27,11 +27,11 @@ class AutomationUtilsBattle
      */
     static calculateClickAttack(getMagikarpValue = false)
     {
-        // Don't consider clicks if the auto-click is not running
-        if (!Automation.Click.isFeatureActive())
-        {
-            return 0;
-        }
+        // // Don't consider clicks if the auto-click is not running
+        // if (!Automation.Click.isFeatureActive())
+        // {
+        //     return 0;
+        // }
 
         // We now need to compute the click attack manually,
         // since the magikarp island has a dedicated computation that will completly ruin everything...
@@ -46,11 +46,11 @@ class AutomationUtilsBattle
         }
 
         const partyClickBonus = caughtPokemon.reduce((total, p) => total + p.clickAttackBonus(), 1);
-        const clickAttack = Math.pow(partyClickBonus, 1.4);
+        const clickAttack = Math.pow(partyClickBonus * 2, 1.4);
 
-        const bonus = App.game.party.multiplier.getBonus('clickAttack', false);
+        const bonus = App.game.party.multiplier.getBonus('clickAttack', true);
 
-        return Math.floor(clickAttack * bonus);
+        return Math.floor(clickAttack * bonus) * 5;
     }
 
     /**
