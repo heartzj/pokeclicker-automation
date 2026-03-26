@@ -527,8 +527,10 @@ class AutomationTrivia
     static __internal__initializeBulletinBoardTrivia()
     {
         // Build bulletin board data
-        const townsWithBoard = Object.entries(TownList).filter(
-            ([_, town]) => (town.content.some(content => Automation.Utils.isInstanceOf(content, "BulletinBoard"))));
+        const townsWithBoard = Object.entries(TownList)
+          .filter(([_, town]) => town.region != GameConstants.Region.hisui)
+          .filter(([_, town]) => (town.content.some(content => Automation.Utils.isInstanceOf(content, "BulletinBoard"))));
+
         this.__internal__townsWithBoard = townsWithBoard.map(
             ([_, town]) =>
             {
